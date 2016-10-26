@@ -45,6 +45,16 @@ namespace Suvoda.TechnicalTest.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
+
+
+        public ActionResult Stock()
+        {
+            var depots = depotsBlo.GetDepotsAssortment();
+            return View(depots);
+        }
+
+
+
     }
 }

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using Suvoda.TechnicalTest.DAL;
 using System.Data.Entity;
+using Suvoda.TechnicalTest.Helpers;
 using Suvoda.TechnicalTest.Models;
+using WebGrease.Css.Ast.Selectors;
 
 namespace Suvoda.TechnicalTest.BLL
 {
@@ -61,6 +63,27 @@ namespace Suvoda.TechnicalTest.BLL
         }
 
 
+        public List<IEnumerable<DepotStockViewModel>> GetDepotsAssortment()
+        {
+            var depots = db.Depots;
+
+            return (from depot in depots
+                    where depot.DrugUnits.Any()
+                    select (from unit in depot.DrugUnits
+                            group unit by unit.DrugType
+                        into typeGroup
+                            select new DepotStockViewModel
+                            {
+                                DepotId = depot.DepotId,
+                                DepotName = depot.DepotName,
+                                DrugTypeId = typeGroup.Key.DrugTypeId,
+                                DrugTypeName = typeGroup.Key.DrugTypeName,
+                                DrugUnitsWeight = typeGroup.Sum(x => x.DrugType.Weight),
+                            })).ToList();
+
+        }
+
+
     }
-    
+
 }

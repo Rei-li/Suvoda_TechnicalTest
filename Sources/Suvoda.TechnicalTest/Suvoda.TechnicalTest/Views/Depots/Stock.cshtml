@@ -1,0 +1,46 @@
+﻿@using Suvoda.TechnicalTest.Models
+@model List<IEnumerable<Suvoda.TechnicalTest.Models.DepotStockViewModel>>
+@{
+    ViewBag.Title = "Stock";
+}
+
+<h2>Stock</h2>
+
+<div class="form-horizontal">
+    @foreach (var depot in Model)
+    {
+
+        <h4>
+            @{
+                var depotStockViewModels = depot as IList<DepotStockViewModel> ?? depot.ToList();
+            }
+            @depotStockViewModels.First().DepotName
+        </h4>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Drug Type")
+                </th>
+                <th>
+                    @Html.Label("Weight, kg")
+                </th>
+
+            </tr>
+
+            @foreach (var type in depotStockViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => type.DrugTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => type.DrugUnitsWeight)
+                    </td>
+                </tr>
+            }
+
+        </table>
+                }
+</div>
