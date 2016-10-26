@@ -1,0 +1,41 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<Suvoda.TechnicalTest.DAL.DrugType>
+
+@{
+    Layout = null;
+}
+
+
+<table class="table" id="typesLst">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DrugTypeName)
+        </th>
+        <th>
+            @Html.Label("Number of units needed")
+        </th>
+        <th>
+            @Html.Label("Drug Unit available")
+        </th>
+        <th> </th>
+    </tr>
+    @foreach(var depot in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => depot.DrugTypeName)
+                @Html.HiddenFor(modelItem => depot.DrugTypeId, new { @class = "js-type-id" })
+            </td>
+            <td>
+                @Html.TextBox("UnitsNeededCount", 0, new {@class = "form-control js-units-needed"})
+                @Html.ValidationMessage("", new { @class = "text-danger js-invalid-units-count" })
+            </td>
+            <td>
+                @Html.Label(" ", new { @class = "js-units-available" })
+            </td>
+            <td>
+                <input type="button" value="calculate" class="btn btn-primary js-calc" data-url="@Url.Action("GetAvailableUnit", "Depots")"/>
+            </td>
+        </tr>
+    }
+</table>

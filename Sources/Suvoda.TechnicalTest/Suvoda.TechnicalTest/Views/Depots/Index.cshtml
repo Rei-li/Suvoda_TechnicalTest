@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Suvoda.TechnicalTest.Models.DepotViewModel>
+
+<h2>Depots</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DepotName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepotLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrugTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrugUnitId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickNumber)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepotName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepotLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugUnitId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickNumber)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+﻿@model Suvoda.TechnicalTest.Models.DepotSelectionViewModel
+@{
+    ViewBag.Title = "Find available units of type needed for each depot";
+}
+
+
+
+<h2>Available Units</h2>
+
+@using (Ajax.BeginForm("AvailableUnits", "Depots", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "typesLst",
+    OnSuccess = "ajaxSuccess",
+    LoadingElementId = "loader" 
+}))
+{
+    <div class="form-horizontal">
+
+        <h5>@ViewBag.Title</h5>
+        <hr/>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedDepotId, "Depot", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SelectedDepotId, Model.DepotsList, new {@class = "form-control js-depots-list"})
+                @Html.ValidationMessageFor(model => model.SelectedDepotId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+    </div>
+
+}
+<div id="typesLst">  </div>
+<div id="loader" class="aletr" style="display: none">
+    Loading...
+</div>
+
+@Scripts.Render("~/Scripts/availableUnitsCalc.js")
+<script type="text/javascript">
+    $.Suvoda.init();
+    var ajaxSuccess = function() {
+        $.Suvoda.ajaxSuccess();
+    };
+</script>
+
