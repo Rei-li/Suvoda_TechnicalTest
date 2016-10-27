@@ -1,5 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using Suvoda.TechnicalTest.BLL;
+using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.Models;
 
 namespace Suvoda.TechnicalTest.Controllers
@@ -17,16 +20,18 @@ namespace Suvoda.TechnicalTest.Controllers
             var depots = depotsBlo.GetDepotsViewList();
             return View(depots);
         }
-        
+
         public ActionResult DepotAvailableUnitsCalculation()
         {
             var depots = depotsBlo.GetDepots();
             var model = new DepotSelectionViewModel();
-            model.DepotsList = new SelectList(depots, "DepotId", "DepotName", model.SelectedDepotId);
+
+            Depot depot;
+            model.DepotsList = new SelectList(depots, nameof(depot.DepotId), nameof(depot.DepotName), model.SelectedDepotId);
             return View(model);
         }
 
-       
+
         [HttpPost]
         public ActionResult AvailableUnits(DepotSelectionViewModel model)
         {
