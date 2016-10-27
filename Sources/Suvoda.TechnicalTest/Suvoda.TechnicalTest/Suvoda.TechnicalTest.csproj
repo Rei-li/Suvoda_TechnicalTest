@@ -331,9 +331,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Depots\Index.cshtml" />
-    <Content Include="Views\DrugUnits\Create.cshtml" />
-    <Content Include="Views\DrugUnits\Delete.cshtml" />
-    <Content Include="Views\DrugUnits\Details.cshtml" />
     <Content Include="Views\DrugUnits\Edit.cshtml" />
     <Content Include="Views\DrugUnits\Index.cshtml" />
     <Content Include="Views\Depots\DepotAvailableUnitsCalculation.cshtml" />
