@@ -17,7 +17,7 @@
                 var depotId = $depotsList[0].value;
                 var validationMsgField = $(".js-invalid-units-count", $row)[0];
 
-                if (parseInt(unitsNeeded)) {
+                if (parseInt(unitsNeeded) && unitsNeeded > 0) {
                     validationMsgField.innerHTML = "";
                     $.post(url, { count: unitsNeeded, type: drugType, depot: depotId }, function (data) {
                         var result = data;
