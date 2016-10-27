@@ -20,7 +20,7 @@ namespace Suvoda.TechnicalTest.Controllers
         
         public ActionResult DepotAvailableUnitsCalculation()
         {
-            var depots = depotsBlo.GetDepotsViewList();
+            var depots = depotsBlo.GetDepots();
             var model = new DepotSelectionViewModel();
             model.DepotsList = new SelectList(depots, "DepotId", "DepotName", model.SelectedDepotId);
             return View(model);
