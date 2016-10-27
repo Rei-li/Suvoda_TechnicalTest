@@ -330,10 +330,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Depots\Create.cshtml" />
-    <Content Include="Views\Depots\Delete.cshtml" />
-    <Content Include="Views\Depots\Details.cshtml" />
-    <Content Include="Views\Depots\Edit.cshtml" />
     <Content Include="Views\Depots\Index.cshtml" />
     <Content Include="Views\DrugUnits\Create.cshtml" />
     <Content Include="Views\DrugUnits\Delete.cshtml" />
