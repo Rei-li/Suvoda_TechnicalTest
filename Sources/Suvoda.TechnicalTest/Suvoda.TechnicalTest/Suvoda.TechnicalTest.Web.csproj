@@ -209,6 +209,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AutofacConfig\WebModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepotsController.cs" />
     <Compile Include="Controllers\DrugUnitsController.cs" />
@@ -218,6 +219,8 @@
     </Compile>
     <Compile Include="Helpers\WeightConverter.cs" />
     <Compile Include="Mappings\DtoModelMapper.cs" />
+    <Compile Include="Mappings\IDtoModelMapper.cs" />
+    <Compile Include="Mappings\KgWeightResolver.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DepotAvailableUnitsCalcViewModel.cs" />
     <Compile Include="Models\DepotModel.cs" />

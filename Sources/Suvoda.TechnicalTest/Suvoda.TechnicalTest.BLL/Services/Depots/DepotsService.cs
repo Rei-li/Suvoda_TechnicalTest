@@ -2,18 +2,21 @@
 using System.Linq;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
+using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.DAL.Repositories.Depots;
 
 namespace Suvoda.TechnicalTest.BLL.Services.Depots
 {
-    public class DepotsService : ServiceBase, IDepotsService
+    public class DepotsService : IDepotsService
     {
         private IDepotsRepository _depots;
+        private IEntityDtoMapper _mapper;
 
-        public DepotsService(IDepotsRepository depotsRepository)
+        public DepotsService(IDepotsRepository depotsRepository, IEntityDtoMapper entityDtoMapper)
         {
             _depots = depotsRepository;
+            _mapper = entityDtoMapper;
         }
 
         /// <summary>
@@ -63,7 +66,7 @@ namespace Suvoda.TechnicalTest.BLL.Services.Depots
         public IEnumerable<LookupDto> GetDepotLookup()
         {
             var depots = _depots.GetDepots().ToList();
-            var lookup = Mapper.Map<List<Depot>, List<LookupDto>>(depots);
+            var lookup = _mapper.AutoMapper.Map<List<Depot>, List<LookupDto>>(depots);
             return lookup;
         }
 

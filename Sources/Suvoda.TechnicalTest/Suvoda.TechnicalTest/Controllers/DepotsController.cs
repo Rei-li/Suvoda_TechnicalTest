@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
 using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
@@ -17,20 +16,21 @@ namespace Suvoda.TechnicalTest.Controllers
         private IDepotsService _depotsService;
         private IDrugTypesService _drugTypesService;
         private IDrugUnitsService _drugUnitsService;
-        private IMapper _mapper = DtoModelMapper.RegisterMappings();
+        private IDtoModelMapper _mapper;
 
-        public DepotsController(IDepotsService depotsService, IDrugTypesService drugTypesService, IDrugUnitsService drugUnitsService)
+        public DepotsController(IDepotsService depotsService, IDrugTypesService drugTypesService, IDrugUnitsService drugUnitsService, IDtoModelMapper dtoModelMapper)
         {
             _depotsService = depotsService;
             _drugTypesService = drugTypesService;
             _drugUnitsService = drugUnitsService;
+            _mapper = dtoModelMapper;
         }
 
         // GET: Depots
         public ActionResult Index()
         {
             var depotDtos = _depotsService.GetDepotsViewList();
-            var lookup = _mapper.Map<IEnumerable<DepotViewDto>, List<DepotViewModel>>(depotDtos);
+            var lookup = _mapper.AutoMapper.Map<IEnumerable<DepotViewDto>, List<DepotViewModel>>(depotDtos);
             return View(lookup);
         }
 
@@ -49,7 +49,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult AvailableUnits(DepotSelectionViewModel model)
         {
             var drugTypes = _drugTypesService.GetDrugTypes();
-            var drugTypesModels = _mapper.Map<IEnumerable<DrugTypeDto>, List<DrugTypeViewModel>>(drugTypes);
+            var drugTypesModels = _mapper.AutoMapper.Map<IEnumerable<DrugTypeDto>, List<DrugTypeViewModel>>(drugTypes);
             return PartialView(drugTypesModels);
         }
 
@@ -68,7 +68,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult Stock()
         {
             var depots = _depotsService.GetDepotsAssortment();
-            var stockModels = _mapper.Map<List<IEnumerable<DepotStockDto>>, List<IEnumerable<DepotStockViewModel>>>(depots);
+            var stockModels = _mapper.AutoMapper.Map<List<IEnumerable<DepotStockDto>>, List<IEnumerable<DepotStockViewModel>>>(depots);
             return View(stockModels);
         }
         

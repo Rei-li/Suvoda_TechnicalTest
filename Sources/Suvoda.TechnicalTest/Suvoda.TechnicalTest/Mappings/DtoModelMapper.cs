@@ -11,9 +11,16 @@ using Suvoda.TechnicalTest.Models;
 
 namespace Suvoda.TechnicalTest.Mappings
 {
-    public static class DtoModelMapper
+    public class DtoModelMapper: IDtoModelMapper
     {
-        public static IMapper RegisterMappings()
+       public IMapper AutoMapper { get; set; }
+
+        public DtoModelMapper()
+       {
+           AutoMapper = RegisterMappings();
+       }
+
+        private IMapper RegisterMappings()
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
@@ -35,14 +42,7 @@ namespace Suvoda.TechnicalTest.Mappings
             return config.CreateMapper();
 
         }
-
-        public class KgWeightResolver : IValueResolver<DepotStockDto, DepotStockViewModel, decimal>
-        {
-            public decimal Resolve(DepotStockDto source, DepotStockViewModel destination, decimal member, ResolutionContext context)
-            {
-                return WeightConverter.ConvertPoundsToKg(source.DrugUnitsWeight);
-            }
-        }
-
+        
     }
+    
 }

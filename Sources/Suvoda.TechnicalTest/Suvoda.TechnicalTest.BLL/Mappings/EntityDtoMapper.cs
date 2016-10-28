@@ -14,9 +14,16 @@ using Suvoda.TechnicalTest.DAL;
 
 namespace Suvoda.TechnicalTest.BLL.Mappings
 {
-    public class EntityDtoMapper
+    public class EntityDtoMapper : IEntityDtoMapper
     {
-        public static IMapper RegisterMappings()
+        public IMapper AutoMapper { get; set; }
+
+        public EntityDtoMapper()
+        {
+            AutoMapper = RegisterMappings();
+        }
+
+        private IMapper RegisterMappings()
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
@@ -25,9 +32,7 @@ namespace Suvoda.TechnicalTest.BLL.Mappings
                 .ForMember(ev => ev.Value, m => m.MapFrom(a => a.DepotName));
 
                 cfg.CreateMap<Depot, DepotDto>().MaxDepth(3);
-               // .ForMember(ev => ev.DrugUnits, m => m.Ignore());
                 cfg.CreateMap<DepotDto, Depot>().MaxDepth(3);
-               // .ForMember(ev => ev.DrugUnits, m => m.Ignore());
 
                 cfg.CreateMap<DrugType, DrugTypeDto>();
                 cfg.CreateMap<DrugTypeDto, DrugType>();

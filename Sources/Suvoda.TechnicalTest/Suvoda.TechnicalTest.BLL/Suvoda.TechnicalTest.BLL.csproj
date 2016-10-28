@@ -67,11 +67,11 @@
     <Compile Include="Dto\DrugUnits\DrugUnitDto.cs" />
     <Compile Include="Dto\LookupDto.cs" />
     <Compile Include="Mappings\EntityDtoMapper.cs" />
+    <Compile Include="Mappings\IEntityDtoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Depots\IDepotsService.cs" />
     <Compile Include="Services\DrugTypes\IDrugTypesService.cs" />
     <Compile Include="Services\DrugUnits\IDrugUnitsService.cs" />
-    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\Depots\DepotsService.cs" />
     <Compile Include="Services\DrugTypes\DrugTypesService.cs" />
     <Compile Include="Services\DrugUnits\DrugUnitsService.cs" />

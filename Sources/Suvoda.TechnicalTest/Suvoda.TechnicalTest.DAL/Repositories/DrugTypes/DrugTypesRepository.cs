@@ -14,8 +14,7 @@ namespace Suvoda.TechnicalTest.DAL.Repositories.DrugTypes
         /// <returns>list of drug types </returns>
         public IEnumerable<DrugType> GetDrugTypes()
         {
-            var drugTypes = db.DrugTypes;
-            return drugTypes.ToList();
+            return db.DrugTypes;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.BLL.Services.Depots;
 using Suvoda.TechnicalTest.BLL.Services.DrugTypes;
 using Suvoda.TechnicalTest.BLL.Services.DrugUnits;
@@ -13,7 +14,8 @@ namespace Suvoda.TechnicalTest.BLL.AutofacConfig
             builder.RegisterType<DepotsService>().As<IDepotsService>().InstancePerLifetimeScope();
             builder.RegisterType<DrugTypesService>().As<IDrugTypesService>().InstancePerLifetimeScope();
             builder.RegisterType<DrugUnitsService>().As<IDrugUnitsService>().InstancePerLifetimeScope();
-           
+            builder.RegisterType<EntityDtoMapper>().As<IEntityDtoMapper>().InstancePerLifetimeScope();
+
         }
     }
 }

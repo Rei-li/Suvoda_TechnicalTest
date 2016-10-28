@@ -16,9 +16,6 @@ namespace Suvoda.TechnicalTest
     {
         protected void Application_Start()
         {
-
-
-
             AutofacConfig();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -34,13 +31,8 @@ namespace Suvoda.TechnicalTest
             var domainAssemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
             builder.RegisterAssemblyModules(domainAssemblies.ToArray());
 
-
-            // Register your MVC controllers. (MvcApplication is the name of
-            // the class in Global.asax.)
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
-
-            // Set the dependency resolver to be Autofac.
+            
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
 using Suvoda.TechnicalTest.BLL.Services.Depots;
@@ -15,12 +14,13 @@ namespace Suvoda.TechnicalTest.Controllers
     {
         private IDrugUnitsService _drugUnitsService;
         private IDepotsService _depotsService;
-        private IMapper _mapper = DtoModelMapper.RegisterMappings();
+        private IDtoModelMapper _mapper;
 
-        public DrugUnitsController(IDepotsService depotsService, IDrugUnitsService drugUnitsService)
+        public DrugUnitsController(IDepotsService depotsService, IDrugUnitsService drugUnitsService, IDtoModelMapper dtoModelMapper)
         {
             _depotsService = depotsService;
             _drugUnitsService = drugUnitsService;
+            _mapper = dtoModelMapper;
         }
 
 
@@ -28,7 +28,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult Index()
         {
             var drugUnits = _drugUnitsService.GetDrugUnits();
-            var drugUnitModels = _mapper.Map<IEnumerable<DrugUnitDto>, List<DrugUnitsViewModel>>(drugUnits);
+            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, List<DrugUnitsViewModel>>(drugUnits);
             return View(drugUnitModels);
         }
         
@@ -44,7 +44,7 @@ namespace Suvoda.TechnicalTest.Controllers
             {
                 return HttpNotFound();
             }
-            var drugUnitModel = _mapper.Map<DrugUnitDto, DrugUnitsViewModel>(drugUnit);
+            var drugUnitModel = _mapper.AutoMapper.Map<DrugUnitDto, DrugUnitsViewModel>(drugUnit);
             LookupDto lookup;
             ViewBag.DepotId = new SelectList(_depotsService.GetDepotLookup(), nameof(lookup.Key), nameof(lookup.Value), drugUnit.DepotId);
             return View(drugUnitModel);
@@ -57,7 +57,7 @@ namespace Suvoda.TechnicalTest.Controllers
         {
             if (ModelState.IsValid)
             {
-                var drugUnitDto = _mapper.Map<DrugUnitsViewModel, DrugUnitDto>(drugUnitModel);
+                var drugUnitDto = _mapper.AutoMapper.Map<DrugUnitsViewModel, DrugUnitDto>(drugUnitModel);
 
                 _drugUnitsService.Save(drugUnitDto);
                 return RedirectToAction("Index");
