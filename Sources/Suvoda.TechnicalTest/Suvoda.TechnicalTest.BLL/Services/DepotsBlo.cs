@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using AutoMapper;
+using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
-using System.Data.Entity;
-using Suvoda.TechnicalTest.Helpers;
-using Suvoda.TechnicalTest.Models;
-using WebGrease.Css.Ast.Selectors;
+using Suvoda.TechnicalTest.DAL.Repositories.Depots;
+using Suvoda.TechnicalTest.Dto;
+using Suvoda.TechnicalTest.Dto.Depots;
 
-namespace Suvoda.TechnicalTest.BLL
+namespace Suvoda.TechnicalTest.BLL.Services
 {
     public class DepotsBlo : BloBase
     {
+        private DepotsRepository _depots = new DepotsRepository();
+     
         /// <summary>
         /// Get depots with drug units from that depot
         /// </summary>
         /// <returns>list of depots to display</returns>
-        public List<DepotViewModel> GetDepotsViewList()
+        public IEnumerable<DepotViewDto> GetDepotsViewList()
         {
-            List<DepotViewModel> models = new List<DepotViewModel>();
-            var depots = db.Depots.Include(d => d.Country);
+            List<DepotViewDto> models = new List<DepotViewDto>();
+            var depots = _depots.GetDepots();
             foreach (var depot in depots)
             {
                 if (depot.DrugUnits.Any())
                 {
-                    models.AddRange(depot.DrugUnits.Select(drugUnit => new DepotViewModel()
+                    models.AddRange(depot.DrugUnits.Select(drugUnit => new DepotViewDto()
                     {
                         DepotId = depot.DepotId,
                         DepotName = depot.DepotName,
@@ -36,7 +38,7 @@ namespace Suvoda.TechnicalTest.BLL
                 }
                 else
                 {
-                    var depotModel = new DepotViewModel()
+                    var depotModel = new DepotViewDto()
                     {
                         DepotId = depot.DepotId,
                         DepotName = depot.DepotName,
@@ -51,15 +53,16 @@ namespace Suvoda.TechnicalTest.BLL
 
             return models;
         }
-
+        
         /// <summary>
         /// Get all depots
         /// </summary>
         /// <returns>list of depots </returns>
-        public List<Depot> GetDepots()
+        public IEnumerable<LookupDto> GetDepotLookup()
         {
-            var depots = db.Depots;
-            return depots.ToList();
+            var depots = _depots.GetDepots().ToList();
+            var lookup = Mapper.Map<List<Depot>, List<LookupDto>>(depots);
+            return lookup;
         }
 
 
@@ -67,16 +70,16 @@ namespace Suvoda.TechnicalTest.BLL
         /// Get total weight of drug units for every depot and drug type in kg
         /// </summary>
         /// <returns>list of view models with total weight of drug units in kg</returns>
-        public List<IEnumerable<DepotStockViewModel>> GetDepotsAssortment()
+        public List<IEnumerable<DepotStockDto>> GetDepotsAssortment()
         {
-            var depots = db.Depots;
+            var depots = _depots.GetDepots();
 
             return (from depot in depots
                     where depot.DrugUnits.Any()
                     select (from unit in depot.DrugUnits
                             group unit by unit.DrugType
                         into typeGroup
-                            select new DepotStockViewModel
+                            select new DepotStockDto
                             {
                                 DepotId = depot.DepotId,
                                 DepotName = depot.DepotName,
@@ -86,8 +89,5 @@ namespace Suvoda.TechnicalTest.BLL
                             })).ToList();
 
         }
-
-
     }
-
 }

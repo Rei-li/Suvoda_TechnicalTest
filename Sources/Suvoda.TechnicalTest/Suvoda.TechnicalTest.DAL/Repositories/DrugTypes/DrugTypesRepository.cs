@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Suvoda.TechnicalTest.DAL;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Suvoda.TechnicalTest.BLL
+namespace Suvoda.TechnicalTest.DAL.Repositories.DrugTypes
 {
-    public class DrugTypesBlo : BloBase
+    public class DrugTypesRepository : BaseRepository, IDrugTypesRepository
     {
         /// <summary>
         /// Get all drug types
         /// </summary>
         /// <returns>list of drug types </returns>
-        public List<DrugType> GetDrugTypes()
+        public IEnumerable<DrugType> GetDrugTypes()
         {
             var drugTypes = db.DrugTypes;
             return drugTypes.ToList();

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
-using Suvoda.TechnicalTest.DAL;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Suvoda.TechnicalTest.BLL
+namespace Suvoda.TechnicalTest.DAL.Repositories
 {
-    public class BloBase 
+    public class BaseRepository : DbContext
     {
-        protected Repository db = new Repository();
-
-
+        protected suvodaEntities db = new suvodaEntities();
 
         public void Save<T>(T entity) where T : class
         {

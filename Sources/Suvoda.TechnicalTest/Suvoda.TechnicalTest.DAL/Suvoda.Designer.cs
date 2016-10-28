@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Projects\Suvoda\Suvoda_TechnicalTest\Sources\Suvoda.TechnicalTest\Suvoda.TechnicalTest\DAL\SuvodaDataSchema.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Projects\Suvoda\Suvoda\Suvoda_TechnicalTest\Sources\Suvoda.TechnicalTest\Suvoda.TechnicalTest.DAL\Suvoda.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

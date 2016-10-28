@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nadezda.salauyovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="suvodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -105,7 +105,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="nadezdasalauyovaModelStoreContainer">
+        <EntityContainer Name="suvodaModelStoreContainer">
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDestinations" EntityType="Self.DepotDestinations" Schema="dbo" store:Type="Tables" />
@@ -136,7 +136,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="nadezda.salauyovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="suvodaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -247,7 +247,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Repository" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="suvodaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Depots" EntityType="Self.Depot" />
           <EntitySet Name="DepotDestinations" EntityType="Self.DepotDestination" />
@@ -279,9 +279,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="nadezdasalauyovaModelStoreContainer" CdmEntityContainer="Repository">
+        <EntityContainerMapping StorageEntityContainer="suvodaModelStoreContainer" CdmEntityContainer="suvodaEntities">
           <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="nadezda.salauyovaModel.Country">
+            <EntityTypeMapping TypeName="suvodaModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -289,7 +289,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Depots">
-            <EntityTypeMapping TypeName="nadezda.salauyovaModel.Depot">
+            <EntityTypeMapping TypeName="suvodaModel.Depot">
               <MappingFragment StoreEntitySet="Depot">
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="DepotName" ColumnName="DepotName" />
@@ -298,7 +298,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DepotDestinations">
-            <EntityTypeMapping TypeName="nadezda.salauyovaModel.DepotDestination">
+            <EntityTypeMapping TypeName="suvodaModel.DepotDestination">
               <MappingFragment StoreEntitySet="DepotDestinations">
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -307,7 +307,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrugTypes">
-            <EntityTypeMapping TypeName="nadezda.salauyovaModel.DrugType">
+            <EntityTypeMapping TypeName="suvodaModel.DrugType">
               <MappingFragment StoreEntitySet="DrugType">
                 <ScalarProperty Name="DrugTypeId" ColumnName="DrugTypeId" />
                 <ScalarProperty Name="DrugTypeName" ColumnName="DrugTypeName" />
@@ -316,7 +316,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrugUnits">
-            <EntityTypeMapping TypeName="nadezda.salauyovaModel.DrugUnit">
+            <EntityTypeMapping TypeName="suvodaModel.DrugUnit">
               <MappingFragment StoreEntitySet="DrugUnit">
                 <ScalarProperty Name="DrugUnitId" ColumnName="DrugUnitId" />
                 <ScalarProperty Name="PickNumber" ColumnName="PickNumber" />

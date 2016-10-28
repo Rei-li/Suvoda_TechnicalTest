@@ -1,4 +1,4 @@
-﻿@model Suvoda.TechnicalTest.DAL.DrugUnit
+﻿@model Suvoda.TechnicalTest.Models.DrugUnitsViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DrugUnitId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.PickNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.DrugUnitId, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 

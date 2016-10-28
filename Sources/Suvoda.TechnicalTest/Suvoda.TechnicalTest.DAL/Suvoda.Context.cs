@@ -13,10 +13,10 @@ namespace Suvoda.TechnicalTest.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Repository : DbContext
+    public partial class suvodaEntities : DbContext
     {
-        public Repository()
-            : base("name=Repository")
+        public suvodaEntities()
+            : base("name=suvodaEntities")
         {
         }
     
