@@ -12,6 +12,6 @@ namespace Suvoda.TechnicalTest.BLL.Services.Depots
     {
         IEnumerable<DepotViewDto> GetDepotsViewList();
         IEnumerable<LookupDto> GetDepotLookup();
-        List<IEnumerable<DepotStockDto>> GetDepotsAssortment();
+        IEnumerable<IEnumerable<DepotStockDto>> GetDepotsAssortment();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
@@ -30,7 +31,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult Index()
         {
             var depotDtos = _depotsService.GetDepotsViewList();
-            var lookup = _mapper.AutoMapper.Map<IEnumerable<DepotViewDto>, List<DepotViewModel>>(depotDtos);
+            var lookup = _mapper.AutoMapper.Map<IEnumerable<DepotViewDto>, IEnumerable<DepotViewModel>>(depotDtos);
             return View(lookup);
         }
 
@@ -49,7 +50,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult AvailableUnits(DepotSelectionViewModel model)
         {
             var drugTypes = _drugTypesService.GetDrugTypes();
-            var drugTypesModels = _mapper.AutoMapper.Map<IEnumerable<DrugTypeDto>, List<DrugTypeViewModel>>(drugTypes);
+            var drugTypesModels = _mapper.AutoMapper.Map<IEnumerable<DrugTypeDto>, IEnumerable<DrugTypeViewModel>>(drugTypes);
             return PartialView(drugTypesModels);
         }
 
@@ -68,7 +69,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult Stock()
         {
             var depots = _depotsService.GetDepotsAssortment();
-            var stockModels = _mapper.AutoMapper.Map<List<IEnumerable<DepotStockDto>>, List<IEnumerable<DepotStockViewModel>>>(depots);
+            var stockModels = _mapper.AutoMapper.Map<IEnumerable<IEnumerable<DepotStockDto>>, IEnumerable<IEnumerable<DepotStockViewModel>>>(depots.ToList());
             return View(stockModels);
         }
         

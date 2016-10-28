@@ -28,7 +28,7 @@ namespace Suvoda.TechnicalTest.Controllers
         public ActionResult Index()
         {
             var drugUnits = _drugUnitsService.GetDrugUnits();
-            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, List<DrugUnitsViewModel>>(drugUnits);
+            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, IEnumerable<DrugUnitsViewModel>>(drugUnits);
             return View(drugUnitModels);
         }
         

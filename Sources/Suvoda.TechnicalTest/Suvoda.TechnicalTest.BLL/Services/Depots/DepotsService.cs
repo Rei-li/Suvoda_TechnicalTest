@@ -75,7 +75,7 @@ namespace Suvoda.TechnicalTest.BLL.Services.Depots
         /// Get total weight of drug units for every depot and drug type in kg
         /// </summary>
         /// <returns>list of view models with total weight of drug units in kg</returns>
-        public List<IEnumerable<DepotStockDto>> GetDepotsAssortment()
+        public IEnumerable<IEnumerable<DepotStockDto>> GetDepotsAssortment()
         {
             var depots = _depots.GetDepots();
 
