@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
-using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.DAL.Repositories.DrugTypes;
 
-namespace Suvoda.TechnicalTest.BLL.Services
+namespace Suvoda.TechnicalTest.BLL.Services.DrugTypes
 {
-    public class DrugTypesService : ServiceBase
+    public class DrugTypesService : ServiceBase, IDrugTypesService
     {
-        private DrugTypesRepository _drugTypes = new DrugTypesRepository();
+        private IDrugTypesRepository _drugTypes;
+
+        public DrugTypesService(IDrugTypesRepository drugTypesRepository)
+        {
+            _drugTypes = drugTypesRepository;
+        }
 
         /// <summary>
         /// Get all drug types

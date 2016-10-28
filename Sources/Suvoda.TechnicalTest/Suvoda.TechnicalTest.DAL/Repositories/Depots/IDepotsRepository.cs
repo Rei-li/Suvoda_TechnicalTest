@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Suvoda.TechnicalTest.DAL.Repositories.Depots
 {
-    interface IDepotsRepository
+    public interface IDepotsRepository
     {
         IEnumerable<Depot> GetDepots();
     }

@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
-using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.DAL.Repositories.Depots;
 
-namespace Suvoda.TechnicalTest.BLL.Services
+namespace Suvoda.TechnicalTest.BLL.Services.Depots
 {
-    public class DepotsService : ServiceBase
+    public class DepotsService : ServiceBase, IDepotsService
     {
-        private DepotsRepository _depots = new DepotsRepository();
-     
+        private IDepotsRepository _depots;
+
+        public DepotsService(IDepotsRepository depotsRepository)
+        {
+            _depots = depotsRepository;
+        }
+
         /// <summary>
         /// Get depots with drug units from that depot
         /// </summary>

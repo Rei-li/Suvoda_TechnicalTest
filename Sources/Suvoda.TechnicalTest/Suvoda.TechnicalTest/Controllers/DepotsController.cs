@@ -4,7 +4,9 @@ using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
 using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
-using Suvoda.TechnicalTest.BLL.Services;
+using Suvoda.TechnicalTest.BLL.Services.Depots;
+using Suvoda.TechnicalTest.BLL.Services.DrugTypes;
+using Suvoda.TechnicalTest.BLL.Services.DrugUnits;
 using Suvoda.TechnicalTest.Mappings;
 using Suvoda.TechnicalTest.Models;
 
@@ -12,23 +14,29 @@ namespace Suvoda.TechnicalTest.Controllers
 {
     public class DepotsController : Controller
     {
-        private DepotsService depotsBlo = new DepotsService();
-        private DrugTypesService drugTypesBlo = new DrugTypesService();
-        private DrugUnitsService drugUnitsBlo = new DrugUnitsService();
-        private IMapper mapper = DtoModelMapper.RegisterMappings();
+        private IDepotsService _depotsService;
+        private IDrugTypesService _drugTypesService;
+        private IDrugUnitsService _drugUnitsService;
+        private IMapper _mapper = DtoModelMapper.RegisterMappings();
 
+        public DepotsController(IDepotsService depotsService, IDrugTypesService drugTypesService, IDrugUnitsService drugUnitsService)
+        {
+            _depotsService = depotsService;
+            _drugTypesService = drugTypesService;
+            _drugUnitsService = drugUnitsService;
+        }
 
         // GET: Depots
         public ActionResult Index()
         {
-            var depotDtos = depotsBlo.GetDepotsViewList();
-            var lookup = mapper.Map<IEnumerable<DepotViewDto>, List<DepotViewModel>>(depotDtos);
+            var depotDtos = _depotsService.GetDepotsViewList();
+            var lookup = _mapper.Map<IEnumerable<DepotViewDto>, List<DepotViewModel>>(depotDtos);
             return View(lookup);
         }
 
         public ActionResult DepotAvailableUnitsCalculation()
         {
-            var depots = depotsBlo.GetDepotLookup();
+            var depots = _depotsService.GetDepotLookup();
             var model = new DepotSelectionViewModel();
 
             LookupDto lookup;
@@ -40,15 +48,15 @@ namespace Suvoda.TechnicalTest.Controllers
         [HttpPost]
         public ActionResult AvailableUnits(DepotSelectionViewModel model)
         {
-            var drugTypes = drugTypesBlo.GetDrugTypes();
-            var drugTypesModels = mapper.Map<IEnumerable<DrugTypeDto>, List<DrugTypeViewModel>>(drugTypes);
+            var drugTypes = _drugTypesService.GetDrugTypes();
+            var drugTypesModels = _mapper.Map<IEnumerable<DrugTypeDto>, List<DrugTypeViewModel>>(drugTypes);
             return PartialView(drugTypesModels);
         }
 
         [HttpPost]
         public ActionResult GetAvailableUnit(int count, int type, int depot)
         {
-            var drugUnit = drugUnitsBlo.GetDepotAvailableUnit(count, type, depot);
+            var drugUnit = _drugUnitsService.GetDepotAvailableUnit(count, type, depot);
             var result = 0;
             if (drugUnit != null)
             {
@@ -59,8 +67,8 @@ namespace Suvoda.TechnicalTest.Controllers
         
         public ActionResult Stock()
         {
-            var depots = depotsBlo.GetDepotsAssortment();
-            var stockModels = mapper.Map<List<IEnumerable<DepotStockDto>>, List<IEnumerable<DepotStockViewModel>>>(depots);
+            var depots = _depotsService.GetDepotsAssortment();
+            var stockModels = _mapper.Map<List<IEnumerable<DepotStockDto>>, List<IEnumerable<DepotStockViewModel>>>(depots);
             return View(stockModels);
         }
         

@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using AutoMapper;
 using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
-using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.DAL.Repositories.DrugUnits;
 
-namespace Suvoda.TechnicalTest.BLL.Services
+namespace Suvoda.TechnicalTest.BLL.Services.DrugUnits
 {
-    public class DrugUnitsService : ServiceBase
+    public class DrugUnitsService : ServiceBase, IDrugUnitsService
     {
-        private DrugUnitsRepository _drugUnits = new DrugUnitsRepository();
+        private IDrugUnitsRepository _drugUnits;
+
+        public DrugUnitsService(IDrugUnitsRepository drugUnitsRepository)
+        {
+            _drugUnits = drugUnitsRepository;
+        }
 
         /// <summary>
         /// Get all drug units

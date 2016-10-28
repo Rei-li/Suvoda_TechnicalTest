@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Suvoda.TechnicalTest.DAL.Repositories.DrugUnits
 {
-    interface IDrugUnitsRepository
+    public interface IDrugUnitsRepository
     {
         IEnumerable<DrugUnit> GetDrugUnits();
         DrugUnit GetDrugUnitById(int? id);
+        void Save(DrugUnit entity);
     }
 }

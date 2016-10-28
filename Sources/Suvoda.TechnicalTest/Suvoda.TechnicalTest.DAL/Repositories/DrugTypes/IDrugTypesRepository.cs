@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Suvoda.TechnicalTest.DAL.Repositories.DrugTypes
 {
-    interface IDrugTypesRepository
+    public interface IDrugTypesRepository
     {
         IEnumerable<DrugType> GetDrugTypes();
     }
