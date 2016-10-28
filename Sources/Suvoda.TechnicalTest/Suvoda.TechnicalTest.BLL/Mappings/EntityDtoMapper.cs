@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Suvoda.TechnicalTest.BLL.Dto;
+using Suvoda.TechnicalTest.BLL.Dto.Country;
+using Suvoda.TechnicalTest.BLL.Dto.DepotDestination;
+using Suvoda.TechnicalTest.BLL.Dto.Depots;
+using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
+using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
 using Suvoda.TechnicalTest.DAL;
-using Suvoda.TechnicalTest.Dto;
-using Suvoda.TechnicalTest.Dto.Country;
-using Suvoda.TechnicalTest.Dto.DepotDestination;
-using Suvoda.TechnicalTest.Dto.Depots;
-using Suvoda.TechnicalTest.Dto.DrugTypes;
-using Suvoda.TechnicalTest.Dto.DrugUnits;
 
 namespace Suvoda.TechnicalTest.BLL.Mappings
 {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
-using Suvoda.TechnicalTest.Dto;
-using Suvoda.TechnicalTest.Dto.Depots;
-using Suvoda.TechnicalTest.Dto.DrugTypes;
-using Suvoda.TechnicalTest.Dto.DrugUnits;
+using Suvoda.TechnicalTest.BLL.Dto.Depots;
+using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
+using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
 using Suvoda.TechnicalTest.Helpers;
 using Suvoda.TechnicalTest.Models;
 

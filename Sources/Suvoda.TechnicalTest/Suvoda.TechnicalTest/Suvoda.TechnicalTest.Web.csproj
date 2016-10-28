@@ -308,10 +308,6 @@
       <Project>{7675b2d8-5cc2-4b86-aecd-7babe9ec7427}</Project>
       <Name>Suvoda.TechnicalTest.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Suvoda.TechnicalTest.Dto\Suvoda.TechnicalTest.Dto.csproj">
-      <Project>{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}</Project>
-      <Name>Suvoda.TechnicalTest.Dto</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

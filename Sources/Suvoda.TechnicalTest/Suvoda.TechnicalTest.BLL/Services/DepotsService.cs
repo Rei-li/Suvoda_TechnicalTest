@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Suvoda.TechnicalTest.BLL.Dto;
+using Suvoda.TechnicalTest.BLL.Dto.Depots;
 using Suvoda.TechnicalTest.BLL.Mappings;
 using Suvoda.TechnicalTest.DAL;
 using Suvoda.TechnicalTest.DAL.Repositories.Depots;
-using Suvoda.TechnicalTest.Dto;
-using Suvoda.TechnicalTest.Dto.Depots;
 
 namespace Suvoda.TechnicalTest.BLL.Services
 {

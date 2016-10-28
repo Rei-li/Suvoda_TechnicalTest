@@ -53,6 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\Country\CountryDto.cs" />
+    <Compile Include="Dto\DepotDestination\DepotDestinationDto.cs" />
+    <Compile Include="Dto\Depots\DepotDto.cs" />
+    <Compile Include="Dto\Depots\DepotStockDto.cs" />
+    <Compile Include="Dto\Depots\DepotViewDto.cs" />
+    <Compile Include="Dto\DrugTypes\DrugTypeDto.cs" />
+    <Compile Include="Dto\DrugUnits\DrugUnitDto.cs" />
+    <Compile Include="Dto\LookupDto.cs" />
     <Compile Include="Mappings\EntityDtoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceBase.cs" />
@@ -64,10 +72,6 @@
     <ProjectReference Include="..\Suvoda.TechnicalTest.DAL\Suvoda.TechnicalTest.DAL.csproj">
       <Project>{e2860496-7bb5-4672-a622-34e6dc94cc25}</Project>
       <Name>Suvoda.TechnicalTest.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Suvoda.TechnicalTest.Dto\Suvoda.TechnicalTest.Dto.csproj">
-      <Project>{3c693dc3-053e-4fe7-aedc-278fbeedee6a}</Project>
-      <Name>Suvoda.TechnicalTest.Dto</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

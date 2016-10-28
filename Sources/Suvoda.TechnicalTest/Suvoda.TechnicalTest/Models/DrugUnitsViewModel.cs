@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Suvoda.TechnicalTest.Dto.Depots;
+using Suvoda.TechnicalTest.BLL.Dto.Depots;
 
 namespace Suvoda.TechnicalTest.Models
 {

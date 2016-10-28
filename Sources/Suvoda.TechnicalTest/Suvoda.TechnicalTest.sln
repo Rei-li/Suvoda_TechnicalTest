@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suvoda.TechnicalTest.DAL", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suvoda.TechnicalTest.BLL", "Suvoda.TechnicalTest.BLL\Suvoda.TechnicalTest.BLL.csproj", "{7675B2D8-5CC2-4B86-AECD-7BABE9EC7427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suvoda.TechnicalTest.Dto", "Suvoda.TechnicalTest.Dto\Suvoda.TechnicalTest.Dto.csproj", "{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{7675B2D8-5CC2-4B86-AECD-7BABE9EC7427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7675B2D8-5CC2-4B86-AECD-7BABE9EC7427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7675B2D8-5CC2-4B86-AECD-7BABE9EC7427}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C693DC3-053E-4FE7-AEDC-278FBEEDEE6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

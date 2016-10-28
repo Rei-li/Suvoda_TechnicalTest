@@ -2,11 +2,9 @@
 using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
-using Suvoda.TechnicalTest.BLL;
+using Suvoda.TechnicalTest.BLL.Dto;
+using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
 using Suvoda.TechnicalTest.BLL.Services;
-using Suvoda.TechnicalTest.Dto;
-using Suvoda.TechnicalTest.Dto.Depots;
-using Suvoda.TechnicalTest.Dto.DrugUnits;
 using Suvoda.TechnicalTest.Mappings;
 using Suvoda.TechnicalTest.Models;
 
