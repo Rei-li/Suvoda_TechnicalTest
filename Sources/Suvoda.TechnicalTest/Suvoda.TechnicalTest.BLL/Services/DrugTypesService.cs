@@ -9,7 +9,7 @@ using Suvoda.TechnicalTest.Dto.DrugTypes;
 
 namespace Suvoda.TechnicalTest.BLL.Services
 {
-    public class DrugTypesBlo : BloBase
+    public class DrugTypesService : ServiceBase
     {
         private DrugTypesRepository _drugTypes = new DrugTypesRepository();
 

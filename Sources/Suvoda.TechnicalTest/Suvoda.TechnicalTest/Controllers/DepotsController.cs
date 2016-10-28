@@ -15,9 +15,9 @@ namespace Suvoda.TechnicalTest.Controllers
 {
     public class DepotsController : Controller
     {
-        private DepotsBlo depotsBlo = new DepotsBlo();
-        private DrugTypesBlo drugTypesBlo = new DrugTypesBlo();
-        private DrugUnitsBlo drugUnitsBlo = new DrugUnitsBlo();
+        private DepotsService depotsBlo = new DepotsService();
+        private DrugTypesService drugTypesBlo = new DrugTypesService();
+        private DrugUnitsService drugUnitsBlo = new DrugUnitsService();
         private IMapper mapper = DtoModelMapper.RegisterMappings();
 
 

@@ -10,7 +10,7 @@ using Suvoda.TechnicalTest.Dto.Depots;
 
 namespace Suvoda.TechnicalTest.BLL.Services
 {
-    public class DepotsBlo : BloBase
+    public class DepotsService : ServiceBase
     {
         private DepotsRepository _depots = new DepotsRepository();
      
