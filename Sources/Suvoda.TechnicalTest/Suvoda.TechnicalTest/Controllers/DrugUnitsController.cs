@@ -1,20 +1,35 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
-using Suvoda.TechnicalTest.BLL;
-using Suvoda.TechnicalTest.DAL;
+using Suvoda.TechnicalTest.BLL.Dto;
+using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
+using Suvoda.TechnicalTest.BLL.Services.Depots;
+using Suvoda.TechnicalTest.BLL.Services.DrugUnits;
+using Suvoda.TechnicalTest.Mappings;
+using Suvoda.TechnicalTest.Models;
 
 namespace Suvoda.TechnicalTest.Controllers
 {
     public class DrugUnitsController : Controller
     {
-        private DrugUnitsBlo drugUnitsBlo = new DrugUnitsBlo();
-        private DepotsBlo depotsBlo = new DepotsBlo();
+        private IDrugUnitsService _drugUnitsService;
+        private IDepotsService _depotsService;
+        private IDtoModelMapper _mapper;
+
+        public DrugUnitsController(IDepotsService depotsService, IDrugUnitsService drugUnitsService, IDtoModelMapper dtoModelMapper)
+        {
+            _depotsService = depotsService;
+            _drugUnitsService = drugUnitsService;
+            _mapper = dtoModelMapper;
+        }
+
 
         // GET: DrugUnits
         public ActionResult Index()
         {
-            var drugUnits = drugUnitsBlo.GetDrugUnits();
-            return View(drugUnits);
+            var drugUnits = _drugUnitsService.GetDrugUnits();
+            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, IEnumerable<DrugUnitsViewModel>>(drugUnits);
+            return View(drugUnitModels);
         }
         
         // GET: DrugUnits/Edit/5
@@ -24,27 +39,33 @@ namespace Suvoda.TechnicalTest.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DrugUnit drugUnit = drugUnitsBlo.GetDrugUnitById(id);
+            var drugUnit = _drugUnitsService.GetDrugUnitById(id);
             if (drugUnit == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DepotId = new SelectList(depotsBlo.GetDepots(), nameof(drugUnit.DepotId) , nameof(drugUnit.Depot.DepotName), drugUnit.DepotId);
-            return View(drugUnit);
+            var drugUnitModel = _mapper.AutoMapper.Map<DrugUnitDto, DrugUnitsViewModel>(drugUnit);
+            LookupDto lookup;
+            ViewBag.DepotId = new SelectList(_depotsService.GetDepotLookup(), nameof(lookup.Key), nameof(lookup.Value), drugUnit.DepotId);
+            return View(drugUnitModel);
         }
 
         // POST: DrugUnits/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DrugUnitId,PickNumber,DrugTypeId,DepotId")] DrugUnit drugUnit)
+        public ActionResult Edit([Bind(Include = "DrugUnitId,PickNumber,DrugTypeId,DepotId")] DrugUnitsViewModel drugUnitModel)
         {
             if (ModelState.IsValid)
             {
-                drugUnitsBlo.Save(drugUnit);
+                var drugUnitDto = _mapper.AutoMapper.Map<DrugUnitsViewModel, DrugUnitDto>(drugUnitModel);
+
+                _drugUnitsService.Save(drugUnitDto);
                 return RedirectToAction("Index");
             }
-            ViewBag.DepotId = new SelectList(depotsBlo.GetDepots(), nameof(drugUnit.DepotId), nameof(drugUnit.Depot.DepotName), drugUnit.DepotId);
-            return View(drugUnit);
+            
+            LookupDto lookup;
+            ViewBag.DepotId = new SelectList(_depotsService.GetDepotLookup(), nameof(lookup.Key), nameof(lookup.Value), drugUnitModel.DepotId);
+            return View(drugUnitModel);
         }
 
         

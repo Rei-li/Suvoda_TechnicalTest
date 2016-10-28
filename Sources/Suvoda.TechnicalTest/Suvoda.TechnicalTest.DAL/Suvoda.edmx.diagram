@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2fedcdc4ad5049289acef5c48dbb7daf" Name="Diagram1">
+        <EntityTypeShape EntityType="suvodaModel.Country" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="suvodaModel.Depot" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="suvodaModel.DepotDestination" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="suvodaModel.DrugType" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="suvodaModel.DrugUnit" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="suvodaModel.FK_Depot_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="suvodaModel.FK_DepotDestinations_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="suvodaModel.FK_DepotDestinations_Depot" ManuallyRouted="false" />
+        <AssociationConnector Association="suvodaModel.FK_DrugUnit_Depot" ManuallyRouted="false" />
+        <AssociationConnector Association="suvodaModel.FK_DrugUnit_DrugType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
