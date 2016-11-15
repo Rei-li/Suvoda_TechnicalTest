@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
@@ -14,7 +15,7 @@ namespace Suvoda.TechnicalTest
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            var cors = new EnableCorsAttribute("http://localhost:8000", "*", "*");
+            var cors = new EnableCorsAttribute(ConfigurationManager.AppSettings["WebOrigin"], "*", "*");
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(

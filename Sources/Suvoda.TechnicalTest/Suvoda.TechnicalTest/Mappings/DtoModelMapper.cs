@@ -36,6 +36,12 @@ namespace Suvoda.TechnicalTest.Mappings
                 cfg.CreateMap<DrugUnitDto, DrugUnitsViewModel>().MaxDepth(3);
                 cfg.CreateMap<DrugUnitsViewModel, DrugUnitDto>().MaxDepth(3);
 
+                cfg.CreateMap<DrugUnitDto, DrugUnitsApiModel>()
+                    .ForMember(dest => dest.DepotName, opt => opt.MapFrom(s => s.Depot.DepotName))
+                    .ForMember(dest => dest.DrugTypeName, opt => opt.MapFrom(s => s.DrugType.DrugTypeName))
+                    .ForSourceMember(s => s.Depot, opt => opt.Ignore())
+                    .ForSourceMember(s => s.DrugType, opt => opt.Ignore());
+
 
             });
             config.AssertConfigurationIsValid();

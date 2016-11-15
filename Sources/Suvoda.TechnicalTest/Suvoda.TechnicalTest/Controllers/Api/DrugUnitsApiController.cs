@@ -31,10 +31,10 @@ namespace Suvoda.TechnicalTest.Controllers.Api
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("")]
-        public IEnumerable<DrugUnitsViewModel> Index()
+        public IEnumerable<DrugUnitsApiModel> Index()
         {
             var drugUnits = _drugUnitsService.GetDrugUnits();
-            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, IEnumerable<DrugUnitsViewModel>>(drugUnits);
+            var drugUnitModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, IEnumerable<DrugUnitsApiModel>>(drugUnits);
             return drugUnitModels;
         }
 

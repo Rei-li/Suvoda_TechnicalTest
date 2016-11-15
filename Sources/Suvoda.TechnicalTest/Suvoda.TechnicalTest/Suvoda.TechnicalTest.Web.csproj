@@ -270,6 +270,7 @@
     <Compile Include="Models\DepotModel.cs" />
     <Compile Include="Models\DepotViewModel.cs" />
     <Compile Include="Models\DrugTypeViewModel.cs" />
+    <Compile Include="Models\DrugUnitsApiModel.cs" />
     <Compile Include="Models\DrugUnitsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
