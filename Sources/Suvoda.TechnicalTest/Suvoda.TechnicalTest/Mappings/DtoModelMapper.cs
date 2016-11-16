@@ -40,7 +40,8 @@ namespace Suvoda.TechnicalTest.Mappings
                     .ForMember(dest => dest.DepotName, opt => opt.MapFrom(s => s.Depot.DepotName))
                     .ForMember(dest => dest.DrugTypeName, opt => opt.MapFrom(s => s.DrugType.DrugTypeName))
                     .ForSourceMember(s => s.Depot, opt => opt.Ignore())
-                    .ForSourceMember(s => s.DrugType, opt => opt.Ignore());
+                    .ForSourceMember(s => s.DrugType, opt => opt.Ignore())
+                    .ReverseMap();
 
 
             });

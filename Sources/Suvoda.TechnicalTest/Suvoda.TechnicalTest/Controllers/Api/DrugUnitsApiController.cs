@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Mvc;
-using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
-using Suvoda.TechnicalTest.BLL.Services.Depots;
 using Suvoda.TechnicalTest.BLL.Services.DrugUnits;
 using Suvoda.TechnicalTest.Mappings;
 using Suvoda.TechnicalTest.Models;
@@ -17,13 +11,11 @@ namespace Suvoda.TechnicalTest.Controllers.Api
     [System.Web.Http.RoutePrefix("api/units")]
     public class DrugUnitsApiController : ApiController
     {
-        private IDrugUnitsService _drugUnitsService;
-       // private IDepotsService _depotsService;
-        private IDtoModelMapper _mapper;
+        private readonly IDrugUnitsService _drugUnitsService;
+        private readonly IDtoModelMapper _mapper;
 
         public DrugUnitsApiController( IDrugUnitsService drugUnitsService, IDtoModelMapper dtoModelMapper)
         {
-           // _depotsService = depotsService;
             _drugUnitsService = drugUnitsService;
             _mapper = dtoModelMapper;
         }
@@ -40,7 +32,7 @@ namespace Suvoda.TechnicalTest.Controllers.Api
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("{id:int}")]
-        public DrugUnitsViewModel Edit(int? id)
+        public DrugUnitsApiModel Edit(int? id)
         {
             if (id == null)
             {
@@ -51,29 +43,23 @@ namespace Suvoda.TechnicalTest.Controllers.Api
             {
                 return null;
             }
-            var drugUnitModel = _mapper.AutoMapper.Map<DrugUnitDto, DrugUnitsViewModel>(drugUnit);
-            //LookupDto lookup;
-            //ViewBag.DepotId = new SelectList(_depotsService.GetDepotLookup(), nameof(lookup.Key), nameof(lookup.Value), drugUnit.DepotId);
+            var drugUnitModel = _mapper.AutoMapper.Map<DrugUnitDto, DrugUnitsApiModel>(drugUnit);
             return drugUnitModel;
         }
 
 
-        [System.Web.Http.Route("{id:int}")]
+        [System.Web.Http.Route("{unitId:int}")]
         [System.Web.Http.HttpPost]
         [ValidateAntiForgeryToken]
-        public void Edit([FromBody] DrugUnitsViewModel drugUnitModel)
+        public void EditDepotAssigned([FromBody] DrugUnitsApiModel drugUnitModel)
         {
             if (ModelState.IsValid)
             {
-                var drugUnitDto = _mapper.AutoMapper.Map<DrugUnitsViewModel, DrugUnitDto>(drugUnitModel);
+                var drugUnitDto = _mapper.AutoMapper.Map<DrugUnitsApiModel, DrugUnitDto>(drugUnitModel);
 
                 _drugUnitsService.Save(drugUnitDto);
-               
-            }
 
-            //LookupDto lookup;
-            //ViewBag.DepotId = new SelectList(_depotsService.GetDepotLookup(), nameof(lookup.Key), nameof(lookup.Value), drugUnitModel.DepotId);
-          //  return View(drugUnitModel);
+            }
         }
 
     }
