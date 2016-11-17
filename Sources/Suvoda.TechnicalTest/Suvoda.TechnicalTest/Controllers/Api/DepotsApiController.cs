@@ -22,16 +22,12 @@ namespace Suvoda.TechnicalTest.Controllers.Api
     public class DepotsApiController : ApiController
     {
         private IDepotsService _depotsService;
-        private IDrugTypesService _drugTypesService;
-        private IDrugUnitsService _drugUnitsService;
         private IDtoModelMapper _mapper;
 
 
-        public DepotsApiController(IDepotsService depotsService, IDrugTypesService drugTypesService, IDrugUnitsService drugUnitsService, IDtoModelMapper dtoModelMapper)
+        public DepotsApiController(IDepotsService depotsService, IDtoModelMapper dtoModelMapper)
         {
             _depotsService = depotsService;
-            _drugTypesService = drugTypesService;
-            _drugUnitsService = drugUnitsService;
             _mapper = dtoModelMapper;
         }
 
@@ -48,7 +44,7 @@ namespace Suvoda.TechnicalTest.Controllers.Api
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("lookup")]
-        public DepotSelectionViewModel DepotAvailableUnitsCalculation()
+        public DepotSelectionViewModel GetDepotLookup()
         {
             var depots = _depotsService.GetDepotLookup();
             var model = new DepotSelectionViewModel();
@@ -57,37 +53,6 @@ namespace Suvoda.TechnicalTest.Controllers.Api
             model.DepotsList = new SelectList(depots, nameof(lookup.Key), nameof(lookup.Value), model.SelectedDepotId);
             return model;
         }
-
-
-        [System.Web.Http.Route("types")]
-        [System.Web.Http.HttpPost]
-        public IEnumerable<DrugTypeViewModel> AvailableUnits(DepotSelectionViewModel model)
-        {
-            var drugTypes = _drugTypesService.GetDrugTypes();
-            var drugTypesModels = _mapper.AutoMapper.Map<IEnumerable<DrugTypeDto>, IEnumerable<DrugTypeViewModel>>(drugTypes);
-            return drugTypesModels;
-        }
-
-        [System.Web.Http.Route("{depot:int}/available")]
-        [System.Web.Http.HttpPost]
-        public int GetAvailableUnit(int count, int type, int depot)
-        {
-            var drugUnit = _drugUnitsService.GetDepotAvailableUnit(count, type, depot);
-            var result = 0;
-            if (drugUnit != null)
-            {
-                result = drugUnit.DrugUnitId;
-            }
-            return result;
-        }
-
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("stock")]
-        public IEnumerable<IEnumerable<DepotStockViewModel>> Stock()
-        {
-            var depots = _depotsService.GetDepotsAssortment();
-            var stockModels = _mapper.AutoMapper.Map<IEnumerable<IEnumerable<DepotStockDto>>, IEnumerable<IEnumerable<DepotStockViewModel>>>(depots.ToList());
-            return stockModels;
-        }
+        
     }
 }
