@@ -13,10 +13,10 @@ namespace Suvoda.TechnicalTest.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class suvodaEntities : DbContext
+    public partial class Suvoda : DbContext
     {
-        public suvodaEntities()
-            : base("name=suvodaEntities")
+        public Suvoda()
+            : base("name=Suvoda")
         {
         }
     
@@ -30,5 +30,6 @@ namespace Suvoda.TechnicalTest.DAL
         public virtual DbSet<DepotDestination> DepotDestinations { get; set; }
         public virtual DbSet<DrugType> DrugTypes { get; set; }
         public virtual DbSet<DrugUnit> DrugUnits { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

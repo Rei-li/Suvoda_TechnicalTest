@@ -10,7 +10,7 @@ namespace Suvoda.TechnicalTest.DAL.Repositories
 {
     public class BaseRepository : DbContext
     {
-        protected suvodaEntities db = new suvodaEntities();
+        protected Suvoda db = new Suvoda();
 
         public void Save<T>(T entity) where T : class
         {

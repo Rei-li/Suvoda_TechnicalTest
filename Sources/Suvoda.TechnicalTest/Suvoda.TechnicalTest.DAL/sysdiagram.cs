@@ -12,14 +12,12 @@ namespace Suvoda.TechnicalTest.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class DrugUnit
+    public partial class sysdiagram
     {
-        public int DrugUnitId { get; set; }
-        public int PickNumber { get; set; }
-        public int DrugTypeId { get; set; }
-        public Nullable<int> DepotId { get; set; }
-    
-        public virtual Depot Depot { get; set; }
-        public virtual DrugType DrugType { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

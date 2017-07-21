@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="suvodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SuvodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -44,6 +44,16 @@
           <Property Name="PickNumber" Type="int" Nullable="false" />
           <Property Name="DrugTypeId" Type="int" Nullable="false" />
           <Property Name="DepotId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Depot_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
@@ -105,12 +115,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="suvodaModelStoreContainer">
+        <EntityContainer Name="SuvodaModelStoreContainer">
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDestinations" EntityType="Self.DepotDestinations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrugType" EntityType="Self.DrugType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrugUnit" EntityType="Self.DrugUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Depot_Country" Association="Self.FK_Depot_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Depot" EntitySet="Depot" />
@@ -136,7 +147,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="suvodaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SuvodaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -187,6 +198,16 @@
           <NavigationProperty Name="Depot" Relationship="Self.FK_DrugUnit_Depot" FromRole="DrugUnit" ToRole="Depot" />
           <NavigationProperty Name="DrugType" Relationship="Self.FK_DrugUnit_DrugType" FromRole="DrugUnit" ToRole="DrugType" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_Depot_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
@@ -247,12 +268,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="suvodaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Suvoda" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Depots" EntityType="Self.Depot" />
           <EntitySet Name="DepotDestinations" EntityType="Self.DepotDestination" />
           <EntitySet Name="DrugTypes" EntityType="Self.DrugType" />
           <EntitySet Name="DrugUnits" EntityType="Self.DrugUnit" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_Depot_Country" Association="Self.FK_Depot_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="Depot" EntitySet="Depots" />
@@ -279,9 +301,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="suvodaModelStoreContainer" CdmEntityContainer="suvodaEntities">
+        <EntityContainerMapping StorageEntityContainer="SuvodaModelStoreContainer" CdmEntityContainer="Suvoda">
           <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="suvodaModel.Country">
+            <EntityTypeMapping TypeName="SuvodaModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -289,7 +311,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Depots">
-            <EntityTypeMapping TypeName="suvodaModel.Depot">
+            <EntityTypeMapping TypeName="SuvodaModel.Depot">
               <MappingFragment StoreEntitySet="Depot">
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="DepotName" ColumnName="DepotName" />
@@ -298,7 +320,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DepotDestinations">
-            <EntityTypeMapping TypeName="suvodaModel.DepotDestination">
+            <EntityTypeMapping TypeName="SuvodaModel.DepotDestination">
               <MappingFragment StoreEntitySet="DepotDestinations">
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -307,7 +329,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrugTypes">
-            <EntityTypeMapping TypeName="suvodaModel.DrugType">
+            <EntityTypeMapping TypeName="SuvodaModel.DrugType">
               <MappingFragment StoreEntitySet="DrugType">
                 <ScalarProperty Name="DrugTypeId" ColumnName="DrugTypeId" />
                 <ScalarProperty Name="DrugTypeName" ColumnName="DrugTypeName" />
@@ -316,12 +338,23 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrugUnits">
-            <EntityTypeMapping TypeName="suvodaModel.DrugUnit">
+            <EntityTypeMapping TypeName="SuvodaModel.DrugUnit">
               <MappingFragment StoreEntitySet="DrugUnit">
                 <ScalarProperty Name="DrugUnitId" ColumnName="DrugUnitId" />
                 <ScalarProperty Name="PickNumber" ColumnName="PickNumber" />
                 <ScalarProperty Name="DrugTypeId" ColumnName="DrugTypeId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SuvodaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -94,14 +94,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Suvoda.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Suvoda.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="Suvoda.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Suvoda.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
     <None Include="Suvoda.edmx.diagram">
       <DependentUpon>Suvoda.edmx</DependentUpon>
     </None>
@@ -121,7 +124,6 @@
       <LastGenOutput>Suvoda.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
