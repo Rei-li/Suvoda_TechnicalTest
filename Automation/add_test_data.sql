@@ -1,5 +1,4 @@
-
-USE [suvoda];  
+USE [Nadezda.Salauyova];  
 GO
 
 ------------------ [Country] -------------------
@@ -95,36 +94,15 @@ INSERT INTO [dbo].[Country]
 		   
 		   
 ---------------------- [DrugUnit] -------------------		   
-		   
-		  INSERT INTO [dbo].[DrugUnit]
-           ([PickNumber]
-           ,[DrugTypeId]
-           ,[DepotId])
-     VALUES
-           (15 -- <PickNumber, int,>
-           ,2 -- <DrugTypeId, int,>
-           ,1 -- <DepotId, int,>
-		   )
-
-		   INSERT INTO [dbo].[DrugUnit]
-           ([PickNumber]
-           ,[DrugTypeId]
-           ,[DepotId])
-     VALUES
-           (1 -- <PickNumber, int,>
-           ,1 -- <DrugTypeId, int,>
-           ,2 -- <DepotId, int,>
-		   ) 
-		   
-		 
+	 
 GO  
 CREATE PROCEDURE dbo.PopulateDrugUnits  
 AS 
 
 declare @counter int;
-set @counter = 1;
-  
-  WHILE (@counter < 50)  
+
+set @counter = 1;  
+  WHILE (@counter < 51)  
 BEGIN  
   INSERT INTO [dbo].[DrugUnit]
            ([PickNumber]
@@ -134,11 +112,13 @@ BEGIN
            (@counter -- <PickNumber, int,>
            ,1 -- <DrugTypeId, int,>
            ,null -- <DepotId, int,>
-		   ) 
+		   )
 		   set @counter = @counter + 1
+ 		   
 END  
 
- WHILE (@counter < 100)  
+set @counter = 1;
+ WHILE (@counter < 51)  
 BEGIN  
   INSERT INTO [dbo].[DrugUnit]
            ([PickNumber]
@@ -150,9 +130,11 @@ BEGIN
            ,null -- <DepotId, int,>
 		   ) 
 		   set @counter = @counter + 1
+		   
 END  
 
- WHILE (@counter < 150)  
+set @counter = 1;
+ WHILE (@counter < 51)  
 BEGIN  
   INSERT INTO [dbo].[DrugUnit]
            ([PickNumber]
@@ -175,4 +157,4 @@ GO
 
 DROP PROCEDURE IF EXISTS dbo.PopulateDrugUnits
 		 
-GO	   
+GO
