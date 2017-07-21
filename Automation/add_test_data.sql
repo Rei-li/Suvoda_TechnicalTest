@@ -73,7 +73,7 @@ INSERT INTO [dbo].[Country]
            ,[Weight])
      VALUES
            ('Type1' --<DrugTypeName, nchar(250),>
-           ,22.5 --<Weight, numeric(16,2),>		   
+           ,2.2 --<Weight, numeric(16,2),>		   
 		   )
 
 		   INSERT INTO [dbo].[DrugType]
