@@ -11,14 +11,14 @@ using Suvoda.TechnicalTest.Models;
 
 namespace Suvoda.TechnicalTest.Mappings
 {
-    public class DtoModelMapper: IDtoModelMapper
+    public class DtoModelMapper : IDtoModelMapper
     {
-       public IMapper AutoMapper { get; set; }
+        public IMapper AutoMapper { get; set; }
 
         public DtoModelMapper()
-       {
-           AutoMapper = RegisterMappings();
-       }
+        {
+            AutoMapper = RegisterMappings();
+        }
 
         private IMapper RegisterMappings()
         {
@@ -27,12 +27,18 @@ namespace Suvoda.TechnicalTest.Mappings
                 cfg.CreateMap<DepotViewDto, DepotViewModel>();
                 cfg.CreateMap<DepotViewModel, DepotViewDto>();
 
-                cfg.CreateMap<DrugTypeDto, DrugTypeViewModel>().MaxDepth(3);
-                cfg.CreateMap<DrugTypeViewModel, DrugTypeDto>().MaxDepth(3);
+                cfg.CreateMap<DepotDto, DepotModel>()
+                    .ForSourceMember(s => s.DrugUnits, opt => opt.Ignore())
+                    .ForSourceMember(s => s.DepotDestinations, opt => opt.Ignore())
+                    .ReverseMap();
+
+                cfg.CreateMap<DrugTypeDto, DrugTypeViewModel>()
+                    .ForSourceMember(s => s.DrugUnits, opt => opt.Ignore())
+                    .ReverseMap();
 
                 cfg.CreateMap<DepotStockDto, DepotStockViewModel>()
-         .ForMember(dest => dest.DrugUnitsWeight, opt => opt.ResolveUsing<KgWeightResolver>());
-               
+                    .ForMember(dest => dest.DrugUnitsWeight, opt => opt.ResolveUsing<KgWeightResolver>());
+
                 cfg.CreateMap<DrugUnitDto, DrugUnitsViewModel>().MaxDepth(3);
                 cfg.CreateMap<DrugUnitsViewModel, DrugUnitDto>().MaxDepth(3);
 
@@ -49,7 +55,7 @@ namespace Suvoda.TechnicalTest.Mappings
             return config.CreateMapper();
 
         }
-        
+
     }
-    
+
 }

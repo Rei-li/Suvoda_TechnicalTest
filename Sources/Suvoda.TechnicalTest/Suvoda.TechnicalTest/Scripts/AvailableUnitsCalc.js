@@ -21,8 +21,12 @@
                     validationMsgField.innerHTML = "";
                     $.post(url, { count: unitsNeeded, type: drugType, depot: depotId }, function (data) {
                         var result = data;
+                        var ids = "";
+                        result.forEach(function (item) {
+                            ids += item.DrugUnitId + "; ";
+                        });
                         var label = $(".js-units-available", $row)[0];
-                        label.textContent = result !== 0 ? result : "No Drug Unit was found";
+                        label.textContent = result.length == unitsNeeded ? ids : "Not enough Drug Units to ship. Available units: " + ids;
                     });
                 } else {
                     validationMsgField.innerHTML = "Invalid number";

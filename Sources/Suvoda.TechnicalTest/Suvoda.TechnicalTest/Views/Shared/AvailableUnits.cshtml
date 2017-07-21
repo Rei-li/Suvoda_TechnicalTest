@@ -15,7 +15,7 @@
             @Html.Label("Number of units needed")
         </th>
         <th>
-            @Html.Label("Drug Unit available")
+            @Html.Label("Drug Unit ids")
         </th>
         <th> </th>
     </tr>
@@ -34,7 +34,7 @@
                 @Html.Label(" ", new { @class = "js-units-available" })
             </td>
             <td>
-                <input type="button" value="calculate" class="btn btn-primary js-calc" data-url="@Url.Action("GetAvailableUnit", "Depots")"/>
+                <input type="button" value="calculate" class="btn btn-primary js-calc" data-url="@Url.Action("GetUnitsForShipment", "Depots")"/>
             </td>
         </tr>
     }

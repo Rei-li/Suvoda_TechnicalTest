@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Suvoda.TechnicalTest.BLL.Dto;
 using Suvoda.TechnicalTest.BLL.Dto.Depots;
 using Suvoda.TechnicalTest.BLL.Dto.DrugTypes;
+using Suvoda.TechnicalTest.BLL.Dto.DrugUnits;
 using Suvoda.TechnicalTest.BLL.Services.Depots;
 using Suvoda.TechnicalTest.BLL.Services.DrugTypes;
 using Suvoda.TechnicalTest.BLL.Services.DrugUnits;
@@ -55,15 +56,11 @@ namespace Suvoda.TechnicalTest.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetAvailableUnit(int count, int type, int depot)
+        public ActionResult GetUnitsForShipment(int count, int type, int depot)
         {
-            var drugUnit = _drugUnitsService.GetDepotAvailableUnit(count, type, depot);
-            var result = 0;
-            if (drugUnit != null)
-            {
-                result = drugUnit.DrugUnitId;
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var drugUnits = _drugUnitsService.GetUnitsForShipment(count, type, depot).ToList();           
+            var drugUnitsModels = _mapper.AutoMapper.Map<IEnumerable<DrugUnitDto>, IEnumerable<DrugUnitsViewModel>>(drugUnits);
+            return Json(drugUnitsModels, JsonRequestBehavior.AllowGet);
         }
         
         public ActionResult Stock()

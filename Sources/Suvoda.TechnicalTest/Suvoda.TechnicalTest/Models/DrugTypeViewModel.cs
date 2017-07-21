@@ -14,8 +14,5 @@ namespace Suvoda.TechnicalTest.Models
         public string DrugTypeName { get; set; }
 
         public decimal Weight { get; set; }
-
-        public virtual ICollection<DrugUnitsViewModel> DrugUnits { get; set; }
-
     }
 }

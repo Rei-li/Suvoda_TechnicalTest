@@ -13,7 +13,7 @@ namespace Suvoda.TechnicalTest.Models
         public int DrugTypeId { get; set; }
         public int? DepotId { get; set; }
 
-        public DepotDto Depot { get; set; }
+        public DepotModel Depot { get; set; }
         public DrugTypeViewModel DrugType { get; set; }
     }
 }
