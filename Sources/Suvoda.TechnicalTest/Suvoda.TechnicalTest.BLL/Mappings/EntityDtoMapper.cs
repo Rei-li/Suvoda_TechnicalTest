@@ -31,21 +31,15 @@ namespace Suvoda.TechnicalTest.BLL.Mappings
                 .ForMember(ev => ev.Key, m => m.MapFrom(a => a.DepotId))
                 .ForMember(ev => ev.Value, m => m.MapFrom(a => a.DepotName));
 
-                cfg.CreateMap<Depot, DepotDto>().MaxDepth(3);
-                cfg.CreateMap<DepotDto, Depot>().MaxDepth(3);
+                cfg.CreateMap<Depot, DepotDto>().MaxDepth(3).ReverseMap();
 
-                cfg.CreateMap<DrugType, DrugTypeDto>();
-                cfg.CreateMap<DrugTypeDto, DrugType>();
+                cfg.CreateMap<DrugType, DrugTypeDto>().ReverseMap();
 
-                cfg.CreateMap<DrugUnit, DrugUnitDto>().MaxDepth(3);
-                cfg.CreateMap<DrugUnitDto, DrugUnit>().MaxDepth(3);
+                cfg.CreateMap<DrugUnit, DrugUnitDto>().MaxDepth(3).ReverseMap();
 
-                cfg.CreateMap<Country, CountryDto>();
-                cfg.CreateMap<CountryDto, Country>();
+                cfg.CreateMap<Country, CountryDto>().ReverseMap();
 
-                cfg.CreateMap<DepotDestination, DepotDestinationDto>();
-                cfg.CreateMap<DepotDestinationDto, DepotDestination>();
-
+                cfg.CreateMap<DepotDestination, DepotDestinationDto>().ReverseMap();
 
             });
             config.AssertConfigurationIsValid();

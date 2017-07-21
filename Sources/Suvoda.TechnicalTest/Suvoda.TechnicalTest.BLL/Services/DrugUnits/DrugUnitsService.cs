@@ -30,17 +30,22 @@ namespace Suvoda.TechnicalTest.BLL.Services.DrugUnits
         }
 
         /// <summary>
-        /// Get first suitable drug unit of certain type from certain depot with certain pickNumber
+        /// Get first suitable drug unit of certain type from certain depot for shipment
         /// </summary>
-        /// <param name="pickNumber">number of units needed</param>
+        /// <param name="count">number of units needed</param>
         /// <param name="drugTypeId">id of drug type</param>
         /// <param name="depotId">id of depot</param>
-        /// <returns>first suitable drug unit according to  type, depot and pickNumber </returns>
-        public DrugUnitDto GetDepotAvailableUnit(int pickNumber, int drugTypeId, int depotId)
+        /// <returns>first suitable drug units according to type, depot and pickNumber </returns>
+        public IEnumerable<DrugUnitDto> GetUnitsForShipment(int count, int drugTypeId, int depotId)
         {
-            var drugUnit = _drugUnits.GetDrugUnits().FirstOrDefault(x => x.PickNumber == pickNumber && x.DrugType.DrugTypeId == drugTypeId && x.DepotId == depotId);
-            var drugUnitDto = _mapper.AutoMapper.Map<DrugUnit, DrugUnitDto>(drugUnit);
-            return drugUnitDto;
+            var drugUnits = _drugUnits.GetDrugUnits()
+                    .Where(x => x.DepotId == depotId && x.DrugTypeId == drugTypeId)
+                    .OrderBy(x => x.PickNumber)
+                    .Take(count);
+            var drugUnitDtos = _mapper.AutoMapper.Map<IEnumerable<DrugUnit>, List<DrugUnitDto>>(drugUnits);
+
+            return drugUnitDtos;
+
         }
 
         /// <summary>
@@ -50,7 +55,7 @@ namespace Suvoda.TechnicalTest.BLL.Services.DrugUnits
         /// <returns>drug unit with certain Id</returns>
         public DrugUnitDto GetDrugUnitById(int? id)
         {
-            var drugUnit =_drugUnits.GetDrugUnitById(id);
+            var drugUnit = _drugUnits.GetDrugUnitById(id);
             var drugUnitDto = _mapper.AutoMapper.Map<DrugUnit, DrugUnitDto>(drugUnit);
             return drugUnitDto;
         }

@@ -14,10 +14,5 @@ namespace Suvoda.TechnicalTest.Models
         public string DepotName { get; set; }
         public int DepotLocation { get; set; }
 
-        public virtual CountryDto Country { get; set; }
-
-        public virtual ICollection<DepotDestinationDto> DepotDestinations { get; set; }
-
-        public virtual ICollection<DrugUnitDto> DrugUnits { get; set; }
     }
 }
