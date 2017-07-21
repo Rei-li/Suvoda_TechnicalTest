@@ -250,11 +250,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutofacConfig\WebModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\DepotsApiController.cs" />
-    <Compile Include="Controllers\Api\DrugUnitsApiController.cs" />
     <Compile Include="Controllers\DepotsController.cs" />
     <Compile Include="Controllers\DrugUnitsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -270,7 +267,6 @@
     <Compile Include="Models\DepotModel.cs" />
     <Compile Include="Models\DepotViewModel.cs" />
     <Compile Include="Models\DrugTypeViewModel.cs" />
-    <Compile Include="Models\DrugUnitsApiModel.cs" />
     <Compile Include="Models\DrugUnitsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

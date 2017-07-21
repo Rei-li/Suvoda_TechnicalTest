@@ -27,7 +27,7 @@
                 @Html.HiddenFor(modelItem => depot.DrugTypeId, new { @class = "js-type-id" })
             </td>
             <td>
-                @Html.TextBox("UnitsNeededCount", 0, new {@class = "form-control js-units-needed"})
+                @Html.TextBox("UnitsNeededCount", 1, new {@class = "form-control js-units-needed"})
                 @Html.ValidationMessage("", new { @class = "text-danger js-invalid-units-count" })
             </td>
             <td>

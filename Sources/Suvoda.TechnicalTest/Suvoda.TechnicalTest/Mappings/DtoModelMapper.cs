@@ -24,8 +24,7 @@ namespace Suvoda.TechnicalTest.Mappings
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DepotViewDto, DepotViewModel>();
-                cfg.CreateMap<DepotViewModel, DepotViewDto>();
+                cfg.CreateMap<DepotViewDto, DepotViewModel>().ReverseMap(); 
 
                 cfg.CreateMap<DepotDto, DepotModel>()
                     .ForSourceMember(s => s.DrugUnits, opt => opt.Ignore())
@@ -39,16 +38,7 @@ namespace Suvoda.TechnicalTest.Mappings
                 cfg.CreateMap<DepotStockDto, DepotStockViewModel>()
                     .ForMember(dest => dest.DrugUnitsWeight, opt => opt.ResolveUsing<KgWeightResolver>());
 
-                cfg.CreateMap<DrugUnitDto, DrugUnitsViewModel>().MaxDepth(3);
-                cfg.CreateMap<DrugUnitsViewModel, DrugUnitDto>().MaxDepth(3);
-
-                cfg.CreateMap<DrugUnitDto, DrugUnitsApiModel>()
-                    .ForMember(dest => dest.DepotName, opt => opt.MapFrom(s => s.Depot.DepotName))
-                    .ForMember(dest => dest.DrugTypeName, opt => opt.MapFrom(s => s.DrugType.DrugTypeName))
-                    .ForSourceMember(s => s.Depot, opt => opt.Ignore())
-                    .ForSourceMember(s => s.DrugType, opt => opt.Ignore())
-                    .ReverseMap();
-
+                cfg.CreateMap<DrugUnitDto, DrugUnitsViewModel>().MaxDepth(3).ReverseMap();
 
             });
             config.AssertConfigurationIsValid();
